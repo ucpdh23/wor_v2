@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Team {
+  id String @id @default(cuid())
+  name String
+  owner String
+  logo String @default("")
+}
+
+model Cyclist {
+  id String @id @default(cuid())
+  name String
+  team_id String
+  feat_plain Int
+  feat_climb Int
+  feat_descend Int
+  feat_sprint Int
+  feat_resistence Int
+  feat_tt Int
+}
+
+model Calendar {
+  id String @id @default(cuid())
+  name String
+  date_start Int
+  date_end Int
+  num_stages Int
+  category Int @default(0)
+}
+
+model Stage {
+  id String @id @default(cuid())
+  calendar_id String
+  stage_type Int @default(0)
+  date_stage Int
+  city_from String
+  city_to String  
+  distance Float @default(0)
+  slope Float @default(0)
+}
